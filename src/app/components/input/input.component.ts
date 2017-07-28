@@ -6,14 +6,23 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./input.component.css']
 })
 export class InputComponent {
-  @Output() sendMessage = new EventEmitter();
+  @Output()
+  public sendMessage: EventEmitter<string> = new EventEmitter();
   public text: string = "";
 
-  constructor() {
-  }
-
-  public onClickSend() {
+  public requestMessage(){
     this.sendMessage.emit(this.text);
     this.text = "";
+  }
+
+  public onClickSendButton() {
+    this.requestMessage();
+  }
+
+  public onKeyPress($event) {
+    // press enter key
+    if ( $event.keyCode == 13 ) {
+      this.requestMessage();
+    }
   }
 }

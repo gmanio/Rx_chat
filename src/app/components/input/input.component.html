@@ -1,4 +1,4 @@
 <div>
-  <input class="textarea" type="text" placeholder="Type here!" [(ngModel)]="text">
-  <button class="emojis" (click)="onClickSend()"></button>
+  <input class="textarea" type="text" placeholder="Type here!" [(ngModel)]="text" (keypress)="onKeyPress($event)">
+  <button class="emojis" (click)="onClickSendButton()"></button>
 </div>

@@ -4,6 +4,11 @@ import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 
 /**
+ * Reducer
+ */
+import Reducer from './reducer';
+
+/**
  * Router
  */
 import { RootRouter } from './app.routes';
@@ -24,7 +29,7 @@ import { ChatModule } from './container/chat/chat.module';
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
+    LoginComponent
   ],
   imports: [
     ChatModule,
@@ -32,7 +37,7 @@ import { ChatModule } from './container/chat/chat.module';
     FormsModule,
     BrowserModule,
     HttpClientModule,
-    StoreModule.forRoot({})
+    StoreModule.forRoot(Reducer)
   ],
   providers: [FirebaseService],
   bootstrap: [AppComponent]

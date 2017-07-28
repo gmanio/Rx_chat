@@ -7,16 +7,24 @@ import {
   templateUrl: './message-list.component.html',
   styleUrls: ['./message-list.component.css']
 })
-export class MessageListComponent implements AfterContentChecked {
-  @Input() currentUser: any;
-  @Input() messageList = [];
-  @Output() requestMessageClear: any = new EventEmitter();
+export class MessageListComponent {
+  @Input()
+  public currentUser: any;
+  @Input()
+  public messageList = [];
+  @Output()
+  public requestMessageClear: any = new EventEmitter();
+  @Input()
+  public roomDate: Date = new Date();
+
+  private elHost: any;
 
   constructor(private el: ElementRef) {
+    this.elHost = this.el.nativeElement;
   }
 
-  ngAfterContentChecked() {
-    this.el.nativeElement.scrollTop = this.el.nativeElement.scrollHeight - this.el.nativeElement.clientHeight;
+  public scrollDown() {
+    this.elHost.scrollTop = this.elHost.scrollHeight - this.elHost.clientHeight;
   }
 
   public getCurrentUser(email) {

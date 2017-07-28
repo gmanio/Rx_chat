@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
 import { Router } from '@angular/router';
 
@@ -14,11 +14,20 @@ export class LoginComponent {
 
   constructor(private firebaseService: FirebaseService,
               private router: Router) {
+
+    this.firebaseService.onLoginEmitter$
+      .subscribe((isLoggin: boolean) => {
+        if ( isLoggin ) {
+          this.router.navigate(['chat']);
+        }
+      })
   }
 
   public login() {
+    const convertSKId: string = this.id.concat('@sk.com');
+
     this.firebaseService
-      .login(this.id.concat('@sk.com'), this.password)
+      .login(convertSKId, this.password)
       .subscribe(() => {
         this.router.navigate(['chat']);
       })
